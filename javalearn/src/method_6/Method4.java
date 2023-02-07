@@ -25,6 +25,8 @@ public class Method4 {
 	 * @return
 	 */
 	public static char[] trim(char[] input) {
+		
+		
 		return input ;
 		
 		
