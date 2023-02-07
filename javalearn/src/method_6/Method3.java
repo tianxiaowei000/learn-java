@@ -26,6 +26,8 @@ public class Method3 {
 		int[] result = subArray(array, startIndex, length);
 		
 		System.out.println(Arrays.toString(result));
+		
+		System.out.println(Arrays.toString(result));
 
 	}
 	
