@@ -27,7 +27,6 @@ public class Method3 {
 		
 		System.out.println(Arrays.toString(result));
 		
-		System.out.println(Arrays.toString(result));
 
 	}
 	
