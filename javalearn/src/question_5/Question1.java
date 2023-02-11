@@ -1,11 +1,11 @@
-package problem_5;
+package question_5;
 
 /**
  * 設問１︓1から100までの偶数の和を求める(for + if)。
  * @author user
  *
  */
-public class Problem1 {
+public class Question1 {
 
 	public static void main(String[] args) {
 

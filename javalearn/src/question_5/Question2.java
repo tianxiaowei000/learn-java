@@ -1,12 +1,12 @@
-package problem_5;
+package question_5;
 
 /**
- * 5の階乗を求める(for)。
+ * 質問 2:5の階乗を求める(for)。
  * @author user
  *
  */
 
-public class Problem2 {
+public class Question2 {
 
 	public static void main(String[] args) {
 

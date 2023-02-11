@@ -1,4 +1,4 @@
-package problem_5;
+package question_5;
 
 /**
  * 質問３︓配列 {1, 2, 6, 7, 9, 6, 2, 1} の最⼤値、
@@ -6,7 +6,7 @@ package problem_5;
  * @author user
  *
  */
-public class Problem3 {
+public class Question3 {
 
 	public static void main(String[] args) {
 
@@ -20,6 +20,7 @@ public class Problem3 {
 
 		for (int i = 1; i < array2.length; i++) {
 			sum += array2[i];
+
 			if (intMax < array2[i]) {
 				intMax = array2[i];
 			} else {
