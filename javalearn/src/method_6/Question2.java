@@ -11,7 +11,8 @@ public class Question2 {
 
 	public static void main(String[] args) {
 
-		int[] array = { 1, 3, 4, 5, 6 };
+		int[] array = { 4, 3, 4, 5, 6 };
+		
 
 		System.out.println(intSum(array));
 
@@ -23,7 +24,7 @@ public class Question2 {
 
 	/**
 	 * 合計
-	 * @param array1
+	 * @param array
 	 * @return
 	 */
 	public static int intSum(int[] array) {
@@ -36,6 +37,7 @@ public class Question2 {
 
 		}
 		return intSum;
+
 	}
 
 	/**
@@ -45,9 +47,9 @@ public class Question2 {
 	 */
 	public static int intMax(int[] array) {
 
-		int intMax = 0;
+		int intMax = array[0];
 
-		for (int i = 1; i < array.length; i++) {
+		for (int i = 0; i < array.length; i++) {
 
 			if (intMax < array[i]) {
 				intMax = array[i];
@@ -65,17 +67,15 @@ public class Question2 {
 	 * @return
 	 */
 	public static int intMin(int[] array) {
+		
+		int intMin =array[0];
 
-		int intMin = 1;
+		for (int j = 1; j < array.length; j++) {
 
-		for (int i = 1; i < array.length; i++) {
-
-			if (intMin > array[i]) {
-				intMin = array[i];
+			if (intMin > array[j]) {
+				intMin = array[j];
 			}
 		}
-
 		return intMin;
-
 	}
 }
