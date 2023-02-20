@@ -13,18 +13,16 @@ package chapter_7;
  *
  */
 
-
 public class PetTest {
 
 	public static void main(String[] args) {
-		
+
 		Pet pet = new Pet();
-		
-		Pet cat = new Pet("cat",2);
-		
-		Pet dog = new Pet("dog",5);
-			
-		
+
+		Pet cat = new Pet("cat", 2);
+
+		Pet dog = new Pet("dog", 5);
+
 	}
-	
+
 }
