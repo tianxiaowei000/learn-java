@@ -432,3 +432,89 @@ select birth, timestampdiff(2023/02/18,birth, '2014-06-13') as age, name, positi
 from players
 order by age desc;
 
+--問題10：オウンゴールの回数を表示する
+
+
+select count(g.goal_time)
+from goals g
+where player_id is null
+
+
+--問題11：各グループごとの総得点数を表示して下さい。
+
+
+select c.group_name ,count(g.id)
+from goals g
+left join pairings p on p.id = g.pairing_id 
+left join countries c on p.my_country_id = c.id
+where p.kickoff between '2014-6-13' and '2014-6-27'
+group by c.group_name
+
+
+--問題12：日本VSコロンビア戦（pairings.id = 103）でのコロンビアの得点のゴール時間を表示してください
+
+
+select goal_time
+from goals
+where pairing_id = 103 
+
+
+--問題13：日本VSコロンビア戦の勝敗を表示して下さい。
+
+
+select c.name, COUNT(g.goal_time)
+from goals g
+left join pairings p on p.id = g.pairing_id
+left join countries c on c.id = p.my_country_id
+where g.pairing_id = 39 or g.pairing_id=103
+group by c.name
+
+
+--問題14：グループCの各対戦毎にゴール数を表示してください。
+
+
+select p.kickoff, c1.name as my_country, c2.name as enemy_country, 
+c1.ranking as my_ranking, c2.ranking as enemy_ranking, count(g.id) as my_goals
+from pairings p
+left join countries c1 on c1.id = p.my_country_id
+left join countries c2 on c2.id = p.enemy_country_id
+left join goals g on p.id = g.pairing_id
+where c1.group_name = 'C' and c2.group_name = 'C'
+group by p.kickoff, c1.name, c2.name, c1.ranking ,c2.ranking
+order by p.kickoff, c1.ranking
+
+
+--問題15：グループCの各対戦毎にゴール数を表示してください。
+--(自国のゴール数は副問合せを用いて表示してください。)
+
+
+select p.kickoff, c1.name as my_country, c2.name as enemy_country, 
+c1.ranking as my_ranking, c2.ranking as enemy_ranking, 
+(select COUNT(g.id) from goals g where p.id = g.pairing_id) as my_goals
+from pairings p
+left join countries c1 on c1.id = p.my_country_id
+left join countries c2 on c2.id = p.enemy_country_id
+where c1.group_name = 'C' and c2.group_name = 'C'
+order by p.kickoff, c1.ranking
+
+
+--問題16：グループCの各対戦毎にゴール数を表示してください。
+--(ゴール数がゼロの場合も表示してください。
+--問15の副問合せを用いたSQLにカラムを付けくわえる形で作成してください。)
+--・対戦国のゴール数（※追加！）
+
+
+select p1.kickoff, c1.name as my_country, c2.name as enemy_country, 
+c1.ranking as my_ranking, c2.ranking as enemy_ranking, 
+(select count(g1.id) from goals g1 where p1.id = g1.pairing_id) as my_goals,
+(select count(g2.id) from goals g2 
+left join pairings p2 on p2.id = g2.pairing_id
+where p2.my_country_id = p1.enemy_country_id and 
+p2.enemy_country_id = p1.my_country_id) as enemy_goals
+from pairings p1
+left join countries c1 on c1.id = p1.my_country_id
+left join countries c2 on c2.id = p1.enemy_country_id
+where c1.group_name = 'C' and c2.group_name = 'C'
+order by p1.kickoff, c1.ranking
+
+
