@@ -15,11 +15,11 @@ package chapter_7;
 
 public class Pet {
 
-	//属性
+	
 
-	private String name;
+	private String name; //名称
 
-	private int age;
+	private int age; //年齢
 
 	public Pet() {
 
@@ -38,7 +38,7 @@ public class Pet {
 
 	}
 
-	//メソッド
+	
 	public String getName() {
 		return name;
 	}

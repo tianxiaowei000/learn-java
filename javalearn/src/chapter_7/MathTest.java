@@ -16,7 +16,9 @@ public class MathTest {
 		int[] array = { 11, 2, 6, 7, 9, 6, 2, 1 };
 
 		System.out.println(Math.max(array));
+		
 		System.out.println(Math.min(array));
+		
 		System.out.println(Math.average(array));
 	}
 
