@@ -1,39 +1,33 @@
 package chapter_13;
 
-import java.io.File;
-import java.io.FileReader;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
- 
 public class Main {
- 
-    public static void main(String[] args) {
-        try {
-            //Fileクラスに読み込むファイルを指定する
-            File file = new File("C:\\Users\\user\\Desktop\\tian\\mensetu.txt");
-            
-            
-            //ファイルが存在するか確認する
-            if(file.exists()) {
-                
-                //FileReaderクラスのオブジェクトを生成する
-                FileReader filereader = new FileReader(file);
-                
-                //filereaderクラスのreadメソッドでファイルを1文字ずつ読み込む
-                int data;
-                while((data = filereader.read()) != -1) {
-                    System.out.print((char) data);
-                }
-                
-                //ファイルクローズ
-                filereader.close();
-                
-            } else {
-                System.out.print("ファイルは存在しません");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
- 
+
+	public static void main(String[] args) {
+		//Fileクラスに読み込むファイルを指定する
+		String path = ("C:\\Users\\user\\Desktop\\tian\\mensetu.txt");
+
+		try (FileInputStream fs = new FileInputStream(path);
+
+				InputStreamReader fr = new InputStreamReader(fs, "Shift-JIS");
+
+				BufferedReader br = new BufferedReader(fr)) {
+
+			while ((path = br.readLine()) != null) {
+
+				System.out.println(path);
+
+			}
+
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }
