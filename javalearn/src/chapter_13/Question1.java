@@ -10,10 +10,13 @@ import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
 public class Question1 {
+	public static void main(String[] args) {
 	  String path = ("C:\\Users\\user\\Desktop\\tian\\mensetu.txt");
 
       DefaultTableModel df = (DefaultTableModel) jTable1.getModel();
+      
       int row = jTable1.getSelectedRow();
+      
       int column = 0;
 
       String xxNo = jTable1.getValueAt(row, column).toString();
@@ -25,6 +28,7 @@ public class Question1 {
               BufferedReader br = new BufferedReader(fr)) {
 
           String line;
+          
           while ((line = br.readLine()) != null) {
 
               String[] userInfo = line.split(",");

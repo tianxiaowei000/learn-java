@@ -17,7 +17,9 @@ public class Main {
 				InputStreamReader fr = new InputStreamReader(fs, "Shift-JIS");
 
 				BufferedReader br = new BufferedReader(fr)) {
+			
 			 String line;
+			 
 			while ((line = br.readLine()) != null) {
 				 //String[] temp = line.split(",");
 				  //df.addRow(temp);
