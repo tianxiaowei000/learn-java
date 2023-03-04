@@ -517,4 +517,100 @@ left join countries c2 on c2.id = p1.enemy_country_id
 where c1.group_name = 'C' and c2.group_name = 'C'
 order by p1.kickoff, c1.ranking
 
+--問題17:問題16の結果に得失点差を追加してください。
 
+
+SELECT p1.kickoff, c1.name AS my_country, c2.name AS enemy_country, 
+    c1.ranking AS my_ranking, c2.ranking AS enemy_ranking,
+    (SELECT COUNT(g1.id) FROM goals g1 WHERE p1.id = g1.pairing_id) AS my_goals,
+    (
+        SELECT COUNT(g2.id) 
+        FROM goals g2 
+        LEFT JOIN pairings p2 ON p2.id = g2.pairing_id
+        WHERE p2.my_country_id = p1.enemy_country_id AND p2.enemy_country_id = p1.my_country_id
+    ) AS enemy_goals,
+    (SELECT COUNT(g1.id) FROM goals g1 WHERE p1.id = g1.pairing_id) - ( 
+        SELECT COUNT(g2.id) 
+        FROM goals g2 
+        LEFT JOIN pairings p2 ON p2.id = g2.pairing_id
+        WHERE p2.my_country_id = p1.enemy_country_id AND p2.enemy_country_id = p1.my_country_id
+    ) AS goal_diff
+FROM pairings p1
+LEFT JOIN countries c1 ON c1.id = p1.my_country_id
+LEFT JOIN countries c2 ON c2.id = p1.enemy_country_id
+WHERE c1.group_name = 'C' AND c2.group_name = 'C'
+ORDER BY p1.kickoff, c1.ranking
+
+
+--問題18:ブラジル（my_country_id = 1）対クロアチア（enemy_country_id = 4）戦のキックオフ時間（現地時間）を表示してください。
+
+
+select p.kickoff, ADDTIME(p.kickoff, '-12:00:00') as kickoff_jp
+from pairings p
+where p.my_country_id = 1 and p.enemy_country_id = 4;
+/*ADDTIME(time1, time2)
+time1: 加算する最初の時間値。
+time2: 加算する2番目の時間値。*/
+
+
+--問題19:年齢ごとの選手数を表示してください。
+--（年齢はワールドカップ開催当時である2014-06-13を使って算出してください。）
+
+
+select 
+    timestampdiff(year, birth, '2014-06-13') as age, 
+    COUNT(id) as player_count
+FROM players 
+GROUP BY age
+/*TIMESTAMPDIFF(unit, start_datetime, end_datetime)
+unit: 返される差分の時間単位を指定します。例えば、SECOND、MINUTE、HOUR、DAY、WEEK、MONTH、QUARTER、YEARなどです。
+start_datetime: 差分の計算を開始する日時または時刻を指定します。
+end_datetime: 差分の計算を終了する日時または時刻を指定します。
+*/
+
+
+--問題20:年齢ごとの選手数を表示してください
+--。ただし、10歳毎に合算して表示してください。
+
+
+select TRUNCATE(timestampdiff(year,birth,'2014-06-13'),-1) as age,
+		count(id) as player_count
+from players
+group by age
+
+
+--問題21:年齢ごとの選手数を表示してください。ただし、5歳毎に合算して表示してください。
+。
+
+
+select floor(timestampdiff(year, birth, '2014-06-13') / 5) * 5 as age, count(id) as player_count
+from players
+group  by age 
+
+
+--問題22:以下の条件でSQLを作成し、抽出された結果をもとにどのような傾向があるか考えてみてください。
+
+
+select floor(timestampdiff(year,birth,'2014-06-13')*5) as age,
+		position,count(id) as player_count, AVG(height), AVG(weight)
+from players
+group by age, position
+order by age, position
+
+
+--問題23:身長の高い選手ベスト5を抽出し、以下の項目を表示してください。
+
+
+select name , height, weight
+from players
+order by height desc
+limit 5
+
+
+--問題24:身長の高い選手6位～20位を抽出し、以下の項目を表示してください。
+
+
+select name , height, weight
+from players
+order by height desc
+limit 5, 20
