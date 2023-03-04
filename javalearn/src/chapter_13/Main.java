@@ -17,10 +17,11 @@ public class Main {
 				InputStreamReader fr = new InputStreamReader(fs, "Shift-JIS");
 
 				BufferedReader br = new BufferedReader(fr)) {
-
-			while ((path = br.readLine()) != null) {
-
-				System.out.println(path);
+			 String line;
+			while ((line = br.readLine()) != null) {
+				 //String[] temp = line.split(",");
+				  //df.addRow(temp);
+				System.out.println(line);
 
 			}
 
