@@ -22,6 +22,7 @@ import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+import javax.swing.JCheckBox;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -38,18 +39,24 @@ public class studentManergement extends javax.swing.JFrame {
         initComponents();
     }
 
-    public void kakikomi(List<String> userInfoList) {
+    //書き込み
+    public void kakikomi(List<String> userInfo) {
+
         try {
             FileWriter fileWriter = new FileWriter("C:\\Users\\user\\Desktop\\tian\\mensetu.txt");
 
-            for (String line : userInfoList) {
-                fileWriter.write(line+"\n");
-                
+            for (String line : userInfo) {
+
+                fileWriter.write(line + "\n");
+
             }
+
             fileWriter.close();
+
         } catch (IOException e) {
 
             e.printStackTrace();
+
         }
     }
 
@@ -98,28 +105,27 @@ public class studentManergement extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        id.setText("2");
         id.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 idActionPerformed(evt);
             }
         });
 
-        jButton2.setText("編集");
+        jButton2.setText("登録");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
 
-        jButton3.setText("調べる");
+        jButton3.setText("編集");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
 
-        jButton4.setText("消す");
+        jButton4.setText("削り取る");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
@@ -152,7 +158,7 @@ public class studentManergement extends javax.swing.JFrame {
             }
         });
 
-        jButton5.setText("登録");
+        jButton5.setText("情報一覧");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
@@ -188,11 +194,11 @@ public class studentManergement extends javax.swing.JFrame {
                             .addComponent(name)
                             .addComponent(age))))
                 .addGap(295, 295, 295)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE)
+                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(201, 201, 201))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
@@ -253,6 +259,7 @@ public class studentManergement extends javax.swing.JFrame {
         String path = ("C:\\Users\\user\\Desktop\\tian\\mensetu.txt");
 
         DefaultTableModel df = (DefaultTableModel) jTable1.getModel();
+
         int row = jTable1.getSelectedRow();
         int column = 0;
 
@@ -284,31 +291,29 @@ public class studentManergement extends javax.swing.JFrame {
         }
 
         for (String line : userInfoList) {
-            
+
             System.out.println(line);
-            
+
         }
-        
-         kakikomi(userInfoList);
+
+        kakikomi(userInfoList);
 
 
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
-
-        //Fileクラスに読み込むファイルを指定する
-        String path = ("C:\\Users\\user\\Desktop\\tian\\mensetu.txt");
+        id.getText();
+        name.getText();
+        age.getText();
+        country.getText();
+        sex.getText();
+         String path = ("C:\\Users\\user\\Desktop\\tian\\mensetu.txt");
 
         DefaultTableModel df = (DefaultTableModel) jTable1.getModel();
-        int row = jTable1.getSelectedRow();
-        //清空
         df.setRowCount(0);
-        
+
         try (FileInputStream fs = new FileInputStream(path);
                 InputStreamReader fr = new InputStreamReader(fs, "Shift-JIS");
                 BufferedReader br = new BufferedReader(fr)) {
@@ -319,7 +324,6 @@ public class studentManergement extends javax.swing.JFrame {
 
                 String[] temp = line.split(",");
                 df.addRow(temp);
-
             }
 
         } catch (FileNotFoundException e) {
@@ -327,7 +331,41 @@ public class studentManergement extends javax.swing.JFrame {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        
+        List<String> student = new ArrayList<String>();
 
+        
+        student.add(id.getText() + ',' + name.getText() + ',' + age.getText() + ',' + country.getText() + ',' + sex.getText());
+           
+        kakikomi(student);
+
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        //Fileクラスに読み込むファイルを指定する
+        String path = ("C:\\Users\\user\\Desktop\\tian\\mensetu.txt");
+
+        DefaultTableModel df = (DefaultTableModel) jTable1.getModel();
+        df.setRowCount(0);
+
+        try (FileInputStream fs = new FileInputStream(path);
+                InputStreamReader fr = new InputStreamReader(fs, "Shift-JIS");
+                BufferedReader br = new BufferedReader(fr)) {
+
+            String line;
+
+            while ((line = br.readLine()) != null) {
+
+                String[] temp = line.split(",");
+                df.addRow(temp);
+            }
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }//GEN-LAST:event_jButton5ActionPerformed
 
