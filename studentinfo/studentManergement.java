@@ -37,6 +37,29 @@ public class studentManergement extends javax.swing.JFrame {
     public studentManergement() {
 
         initComponents();
+
+        String path = ("C:\\Users\\user\\Desktop\\tian\\mensetu.txt");
+
+        DefaultTableModel df = (DefaultTableModel) jTable1.getModel();
+
+        try (FileInputStream fs = new FileInputStream(path);
+                InputStreamReader fr = new InputStreamReader(fs, "Shift-JIS");
+                BufferedReader br = new BufferedReader(fr)) {
+
+            String line;
+
+            while ((line = br.readLine()) != null) {
+                String[] temp = line.split(",");
+                df.addRow(temp);
+
+            }
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     //書き込み
@@ -72,7 +95,6 @@ public class studentManergement extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        id = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
@@ -85,6 +107,7 @@ public class studentManergement extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         sex = new javax.swing.JTextField();
         jButton5 = new javax.swing.JButton();
+        id = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addMouseListener(new java.awt.event.MouseAdapter() {
@@ -105,12 +128,6 @@ public class studentManergement extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        id.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                idActionPerformed(evt);
-            }
-        });
-
         jButton2.setText("登録");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -125,7 +142,7 @@ public class studentManergement extends javax.swing.JFrame {
             }
         });
 
-        jButton4.setText("削り取る");
+        jButton4.setText("削除");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
@@ -189,10 +206,10 @@ public class studentManergement extends javax.swing.JFrame {
                                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(country)
-                            .addComponent(id, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
+                            .addComponent(country, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
                             .addComponent(name)
-                            .addComponent(age))))
+                            .addComponent(age)
+                            .addComponent(id, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(295, 295, 295)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE)
@@ -212,10 +229,10 @@ public class studentManergement extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40)
                 .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(4, 4, 4)
+                .addGap(6, 6, 6)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+                    .addComponent(jLabel2)
+                    .addComponent(id, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -240,15 +257,11 @@ public class studentManergement extends javax.swing.JFrame {
                     .addComponent(sex, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(98, Short.MAX_VALUE))
+                .addContainerGap(101, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idActionPerformed
-
-    }//GEN-LAST:event_idActionPerformed
 
     private void sexActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sexActionPerformed
         // TODO add your handling code here:
@@ -256,6 +269,7 @@ public class studentManergement extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
 
+        //削除
         String path = ("C:\\Users\\user\\Desktop\\tian\\mensetu.txt");
 
         DefaultTableModel df = (DefaultTableModel) jTable1.getModel();
@@ -263,7 +277,7 @@ public class studentManergement extends javax.swing.JFrame {
         int row = jTable1.getSelectedRow();
         int column = 0;
 
-        String xxNo = jTable1.getValueAt(row, column).toString();
+        String user_id = jTable1.getValueAt(row, column).toString();
 
         List<String> userInfoList = new ArrayList<String>();
 
@@ -276,7 +290,7 @@ public class studentManergement extends javax.swing.JFrame {
 
                 String[] userInfo = line.split(",");
 
-                if (xxNo.equals(userInfo[0])) {
+                if (user_id.equals(userInfo[0])) {
                     continue;
 
                 }
@@ -303,50 +317,40 @@ public class studentManergement extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        //登録
 
         id.getText();
         name.getText();
         age.getText();
         country.getText();
         sex.getText();
-         String path = ("C:\\Users\\user\\Desktop\\tian\\mensetu.txt");
-
-        DefaultTableModel df = (DefaultTableModel) jTable1.getModel();
-        df.setRowCount(0);
-
-        try (FileInputStream fs = new FileInputStream(path);
-                InputStreamReader fr = new InputStreamReader(fs, "Shift-JIS");
-                BufferedReader br = new BufferedReader(fr)) {
-
-            String line;
-
-            while ((line = br.readLine()) != null) {
-
-                String[] temp = line.split(",");
-                df.addRow(temp);
-            }
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+        
+        try {
+            // 文件路径
+            String filePath = "C:\\Users\\user\\Desktop\\tian\\mensetu.txt";
+            // 追加数据到文件末尾
+            FileWriter writer = new FileWriter(filePath, true);
+            // 要写入文件的数据
+            String data = id.getText() + ',' + name.getText() + ',' + age.getText() + ',' + country.getText() + ',' + sex.getText();
+            // 写入数据到文件
+            writer.write(data + "\n");
+            // 关闭文件
+            writer.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        
-        List<String> student = new ArrayList<String>();
 
-        
-        student.add(id.getText() + ',' + name.getText() + ',' + age.getText() + ',' + country.getText() + ',' + sex.getText());
-           
-        kakikomi(student);
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
         //Fileクラスに読み込むファイルを指定する
+        //情報一覧
         String path = ("C:\\Users\\user\\Desktop\\tian\\mensetu.txt");
 
         DefaultTableModel df = (DefaultTableModel) jTable1.getModel();
+        
         df.setRowCount(0);
 
         try (FileInputStream fs = new FileInputStream(path);
@@ -370,11 +374,65 @@ public class studentManergement extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        //編集
+        id.getText();
+        name.getText();
+        age.getText();
+        country.getText();
+        sex.getText();
+
+        String path = ("C:\\Users\\user\\Desktop\\tian\\mensetu.txt");
+
+        int row = jTable1.getSelectedRow();
+
+        int column = 0;
+
+        String user_id = jTable1.getValueAt(row, column).toString();
+
+        List<String> userInfoList = new ArrayList<String>();
+
+        try (FileInputStream fs = new FileInputStream(path);
+                InputStreamReader fr = new InputStreamReader(fs, "Shift-JIS");
+                BufferedReader br = new BufferedReader(fr)) {
+
+            String line;
+
+            while ((line = br.readLine()) != null) {
+
+                String[] userInfo = line.split(",");
+
+                if (user_id.equals(userInfo[0])) {
+
+                    userInfo[1] = name.getText();
+                    userInfo[2] = age.getText();
+                    userInfo[3] = country.getText();
+                    userInfo[4] = sex.getText();
+
+                    userInfoList.add(userInfo[0] + ',' + userInfo[1] + ',' + userInfo[2] + ',' + userInfo[3] + ',' + userInfo[4]);
+
+                } else {
+                    userInfoList.add(line);
+                }
+
+            }
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        //userInfoList.add(id.getText() + ',' +name.getText() + ',' + age.getText() + ',' + country.getText() + ',' + sex.getText());
+        kakikomi(userInfoList);
+
 
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
+         
+        //表示
         DefaultTableModel df = (DefaultTableModel) jTable1.getModel();
+        
         int row = jTable1.getSelectedRow();
 
         id.setText(df.getValueAt(row, 0).toString());
@@ -435,6 +493,7 @@ public class studentManergement extends javax.swing.JFrame {
         }
         //</editor-fold>
 
+
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -446,7 +505,7 @@ public class studentManergement extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField age;
     private javax.swing.JTextField country;
-    private javax.swing.JTextField id;
+    private javax.swing.JLabel id;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
