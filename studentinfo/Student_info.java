@@ -43,7 +43,6 @@ public class Student_info extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        id = new javax.swing.JLabel();
         name = new javax.swing.JTextField();
         age = new javax.swing.JTextField();
         country = new javax.swing.JTextField();
@@ -52,8 +51,14 @@ public class Student_info extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        id = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                formMouseClicked(evt);
+            }
+        });
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -95,6 +100,11 @@ public class Student_info extends javax.swing.JFrame {
         });
 
         jButton1.setText("登録");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("編集");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -104,6 +114,17 @@ public class Student_info extends javax.swing.JFrame {
         });
 
         jButton4.setText("消し取");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
+        id.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                idActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -117,31 +138,25 @@ public class Student_info extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(jLabel2)
                     .addComponent(jLabel1))
-                .addGap(165, 165, 165)
+                .addGap(235, 235, 235)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(age, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(276, 276, 276)
-                                .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(sex, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(276, 276, 276)
-                                .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(country, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(id, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(276, 276, 276)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                        .addGap(112, 112, 112))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(sex, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
+                            .addComponent(id)
+                            .addComponent(age))
+                        .addGap(275, 275, 275)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(112, 112, 112))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(country, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 519, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -158,11 +173,16 @@ public class Student_info extends javax.swing.JFrame {
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(44, 44, 44)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel1)
-                        .addComponent(id, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(25, 25, 25)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(41, 41, 41)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(25, 25, 25))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(13, 13, 13)))
+                .addGap(3, 3, 3)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -177,11 +197,12 @@ public class Student_info extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
                             .addComponent(country, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(47, 47, 47)
-                        .addComponent(jLabel5))
-                    .addComponent(sex, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(41, 41, 41)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel5)
+                            .addComponent(sex, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(95, 95, 95))
+                .addGap(92, 92, 92))
         );
 
         pack();
@@ -211,8 +232,9 @@ public class Student_info extends javax.swing.JFrame {
             stmt = conn.createStatement();
 
             //select文実行するには　executeQueryメゾット！！！
-            String sql = "select * from student_info";
-
+            String sql = "select * from student_info  "
+                    + "ORDER BY id asc;";
+            //查询
             rset = stmt.executeQuery(sql);
 
             DefaultTableModel df = (DefaultTableModel) jTable1.getModel();
@@ -220,12 +242,12 @@ public class Student_info extends javax.swing.JFrame {
             df.setRowCount(0);
 
             while (rset.next()) {
-                
+
                 df.addRow(new String[]{rset.getString(1), rset.getString(2), rset.getString(3),
                     rset.getString(4), rset.getString(5)});
-                
+
             }
-            
+
             rset.close();
             stmt.close();
             conn.close();
@@ -237,8 +259,124 @@ public class Student_info extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+
+        id.getText();
+        name.getText();
+        age.getText();
+        country.getText();
+        sex.getText();
+
+        //接続.
+        Connection conn = null;
+        //sql操作
+        Statement stmt = null;
+        ResultSet rset = null;
+
+        final String url = "jdbc:postgresql://localhost:5432/tian";
+        final String user = "postgres";
+        final String password = "postgres";
+
+        try {
+            conn = DriverManager.getConnection(url, user, password);
+            stmt = conn.createStatement();
+
+            //select文実行するには　executeQueryメゾット！！！
+            String sql = "UPDATE student_info "
+                    + "set  name =" + "'" + name.getText() + "'" + ","
+                    + " age =" + "'" + age.getText() + "'" + ","
+                    + " country=" + "'" + country.getText() + "'" + ","
+                    + " sex =" + "'" + sex.getText() + "'"
+                    + "where id =" + "'" + id.getText() + "'" + ";";
+            //更新
+            stmt.executeUpdate(sql);
+
+            stmt.close();
+            conn.close();
+        } catch (SQLException ex) {
+
+            Logger.getLogger(Student_info.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+
+
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
+        // TODO add your handling code here:
+        DefaultTableModel df = (DefaultTableModel) jTable1.getModel();
+
+        int row = jTable1.getSelectedRow();
+
+        id.setText(df.getValueAt(row, 0).toString());
+        name.setText(df.getValueAt(row, 1).toString());
+        age.setText(df.getValueAt(row, 2).toString());
+        country.setText(df.getValueAt(row, 3).toString());
+        sex.setText(df.getValueAt(row, 4).toString());
+
+        System.out.println(id.getText());
+        System.out.println(name.getText());
+        System.out.println(age.getText());
+        System.out.println(country.getText());
+        System.out.println(sex.getText());
+    }//GEN-LAST:event_formMouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+
+        //接続.
+        Connection conn = null;
+        //sql操作
+        Statement stmt = null;
+        ResultSet rset = null;
+
+        final String url = "jdbc:postgresql://localhost:5432/tian";
+        final String user = "postgres";
+        final String password = "postgres";
+
+        try {
+            conn = DriverManager.getConnection(url, user, password);
+            stmt = conn.createStatement();
+
+            //select文実行するには　executeQueryメゾット！！！
+            String sql = "INSERT "
+                    + "INTO student_info( "
+                    + "    id "
+                    + "    , name "
+                    + "    , age "
+                    + "    , country "
+                    + "    , sex "
+                    + ") "
+                    + "VALUES ( "
+                    + "'" + id.getText() + "'" + ","
+                    + "'" + name.getText() + "'" + ","
+                    + "'" + age.getText() + "'" + ","
+                    + "'" + country.getText() + "'" + ","
+                    + "'" + sex.getText() + "'" + ")" + ";";
+
+            System.out.print(sql);
+
+            stmt.executeUpdate(sql);
+
+            DefaultTableModel df = (DefaultTableModel) jTable1.getModel();
+
+            df.setRowCount(0);
+
+            stmt.close();
+            conn.close();
+        } catch (SQLException ex) {
+
+            Logger.getLogger(Student_info.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_idActionPerformed
 
     /**
      * @param args the command line arguments
@@ -279,7 +417,7 @@ public class Student_info extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField age;
     private javax.swing.JTextField country;
-    private javax.swing.JLabel id;
+    private javax.swing.JTextField id;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
