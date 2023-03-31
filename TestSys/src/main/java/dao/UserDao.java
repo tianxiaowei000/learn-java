@@ -6,6 +6,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
+import dto.UserDto;
 
 public class UserDao {
 
@@ -59,6 +63,49 @@ public class UserDao {
 					+ "    ,'" + updateDateTime + "'); ";
 			stmt.executeUpdate(sql);
 
+			stmt.close();
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
+	}
+	public void userList(String email, String userId, String password, String name, String nameKana) {
+	
+		
+		
+		try {
+			
+			
+			
+			
+            Class.forName("org.postgresql.Driver");
+            List<UserDto> list = new ArrayList<UserDto>();
+			
+			conn = DriverManager.getConnection(URL, USER, PASSWORD);
+			stmt = conn.createStatement();
+          
+
+			//select文実行するには　executeQueryメゾット！！！
+			 String sql = "select * FROM  user_info"
+	                    + " where" + " del_flag"+"="+"'0'" + ";";
+	            
+	            rset = stmt.executeQuery(sql);
+	            
+	            while (rset.next()) {
+					 email = rset.getString("email");
+					 userId = rset.getString("userId");
+					 password = rset.getString("password");
+					 name = rset.getString("name");
+					 nameKana = rset.getString("nameKana");
+					 
+					list.add(new UserDto(email,userId,password,name,nameKana));
+				}
+	       
+	            
+            rset.close();
 			stmt.close();
 			conn.close();
 		} catch (SQLException e) {

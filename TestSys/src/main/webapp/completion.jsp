@@ -3,10 +3,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+    <title>completion</title>
+    <style>
+        h1 {
+            color: red;
+        }
+    </style>
 </head>
 <body>
-	<h1>Over!!!</h1>
+    <h1>completion</h1>
+    <h2>list</h2>
+    <form action="./UserListController" method="post">
+		<input type="submit" value="list">
+		</form>
 </body>
 </html>

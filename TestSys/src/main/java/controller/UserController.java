@@ -51,7 +51,7 @@ public class UserController extends HttpServlet {
 //		
 		
 	
-		String view = "/Practise.jsp";
+		String view = "/add.jsp";
 		RequestDispatcher dispatcher = request.getRequestDispatcher(view);
 		dispatcher.forward(request, response);
 	  
@@ -111,7 +111,6 @@ public class UserController extends HttpServlet {
 		session.setAttribute("fname", lastname);
 		session.setAttribute("lname_kana", surnamekana);
 	    session.setAttribute("fname_kana", lastnamekana);
-		
 		
 		
 		

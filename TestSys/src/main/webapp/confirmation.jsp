@@ -8,9 +8,9 @@ e<%@ page language="java" contentType="text/html; charset=UTF-8"
 
 
 <script type="text/javascript" async="" defer="" src="https://error.rakuten.co.jp/r-cookiecleaner/r-cc-config-rat.js"></script><script type="text/javascript" src="https://error.rakuten.co.jp/r-cookiecleaner/r-cc-rat.js" async="" defer="" id="ratPluginJSCookieCleaner"></script><script type="text/javascript" async="" defer="" src="https://r.r10s.jp/com/rat/js/ral-1.8.9.js"></script><script type="text/javascript" async="" src="https://static.id.rakuten.co.jp/static/id173fe346f08f1be6ee139ee82913b43c.js"></script><script type="text/javascript" src="/com/js/id/jquery-1.12.4.min.js"></script>
-<script type="text/javascript" src="/com/js/id/jquery-ui-1.11.4.custom/jquery-ui.min.js"></script>
+<script type="text/javascript" src="/js/jquery-1124min.js"></script>
 
-<script type="text/javascript" src="/com/js/id/hint.js"></script>
+<script type="text/javascript" src="/js/hint.js"></script>
 <script type="text/javascript" src="https://static.id.rakuten.co.jp/id.js?apps=dfp"></script>
 <link rel="stylesheet" type="text/css" media="screen" href="/com/css/id/set.css">
 <title>楽天会員登録</title>
@@ -278,7 +278,7 @@ e<%@ page language="java" contentType="text/html; charset=UTF-8"
 <br>
 <br>
 
-<form name="Regist3Form" method="post" action="./UserConfirmation" autocomplete="off" id="regist3Form">
+<form name="Regist3Form" method="post" action="./UserConfirmationController" autocomplete="off" id="regist3Form">
 <input type="hidden" name="service_id" value="top"><input type="hidden" name="MIval" value="rem_regist">
 
 
