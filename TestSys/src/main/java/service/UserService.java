@@ -2,7 +2,10 @@ package service;
 
 
 
+import java.util.List;
+
 import dao.UserDao;
+import dto.UserDto;
 
 public class UserService {
 
@@ -12,10 +15,16 @@ public class UserService {
 
 		userDao.createUser(email, userId, password, name, nameKana);
 	}
-	public void userList(String email, String userId, String password, String name, String nameKana) {
+	
+	/**
+	 * ユーザー情報全件取得
+	 * @return
+	 */
+	public  List<UserDto> userList() {
 		
 		UserDao userDao = new UserDao();
-		userDao.userList(email, userId, password, name, nameKana);
+		List<UserDto> list =userDao.userList();
+		return list;
 		
 	}
 }

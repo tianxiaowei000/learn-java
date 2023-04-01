@@ -17,25 +17,24 @@ public class UserDao {
 	Statement stmt = null;
 	ResultSet rset = null;
 
-	private static final String URL  = "jdbc:postgresql://localhost:5432/letian";
+	private static final String URL = "jdbc:postgresql://localhost:5432/letian";
 	private static final String USER = "postgres";
 	private static final String PASSWORD = "Dd345678";
-
+	
+	
 	/**
 	 * お客様情報新規登録
-	 * @throws ClassNotFoundException 
 	 */
-
-	public  void createUser(String email, String userId, String password, String name, String nameKana) {  
+	public void createUser(String email, String userId, String password, String name, String nameKana) {
 
 		try {
-			
-              Class.forName("org.postgresql.Driver");
-			
-			
+				
+			Class.forName("org.postgresql.Driver");
+
 			conn = DriverManager.getConnection(URL, USER, PASSWORD);
 			stmt = conn.createStatement();
-            //最終追加日
+			
+			//最終追加日
 			LocalDateTime createDateTime = LocalDateTime.now();
 			//最終更新日
 			LocalDateTime updateDateTime = createDateTime.plusYears(1);
@@ -68,51 +67,44 @@ public class UserDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
-			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 		}
 	}
-	public void userList(String email, String userId, String password, String name, String nameKana) {
-	
-		
-		
+
+	/**
+	 * ユーザー情報全件取得
+	 * @return
+	 */
+	public List<UserDto> userList() {
+
+		List<UserDto> list = new ArrayList<UserDto>();
 		try {
-			
-			
-			
-			
-            Class.forName("org.postgresql.Driver");
-            List<UserDto> list = new ArrayList<UserDto>();
-			
+
+			Class.forName("org.postgresql.Driver");
+
 			conn = DriverManager.getConnection(URL, USER, PASSWORD);
 			stmt = conn.createStatement();
-          
 
 			//select文実行するには　executeQueryメゾット！！！
-			 String sql = "select * FROM  user_info"
-	                    + " where" + " del_flag"+"="+"'0'" + ";";
-	            
-	            rset = stmt.executeQuery(sql);
-	            
-	            while (rset.next()) {
-					 email = rset.getString("email");
-					 userId = rset.getString("userId");
-					 password = rset.getString("password");
-					 name = rset.getString("name");
-					 nameKana = rset.getString("nameKana");
-					 
-					list.add(new UserDto(email,userId,password,name,nameKana));
-				}
-	       
-	            
-            rset.close();
+			String sql = "select email,user_id as userId,password,name,name_kana as nameKana FROM  user_info"
+					+ " where" + " del_flag" + "=" + "'0'" + ";";
+
+			rset = stmt.executeQuery(sql);
+      
+			while (rset.next()) {
+
+				list.add(new UserDto(rset.getString("email"), rset.getString("userId"), rset.getString("password"),
+						rset.getString("name"), rset.getString("nameKana")));
+
+			}
+			rset.close();
 			stmt.close();
 			conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
-			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 		}
+		return list;
 	}
 }

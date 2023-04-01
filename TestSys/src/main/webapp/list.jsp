@@ -1,10 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=utf-8" %>
+<%@ page import="java.util.List" %>
+<%@ page import="dto.UserDto" %>
+
 <!DOCTYPE html>
 <html>
 <head>list</head>
 
 <body>
+
 <table>
   <tr>
     <th>email</th>
@@ -14,18 +17,23 @@
     <th>nameKana</th>
     
   </tr>
-<c:forEach var="user" items="${userinfo}">
-  <tr>
-    <td>${user.email}</td>
-    <td>${user.userId}</td>
-    <td>${user.password}</td>
-    <td>${user.name}</td>
-    <td>${user.nameKana}</td>
-  </tr>
-</c:forEach>
+  <% List<UserDto> users = (List<UserDto>)request.getAttribute("users"); %>
+  <%for(UserDto u : users){%>
+    <tr>
+	  <td><%= u.getEmail() %></td>
+	  <td><%= u.getUserId() %></td>
+	  <td><%= u.getPassword() %></td>
+	  <td><%= u.getName() %></td>
+	  <td><%= u.getNameKana() %></td>
+   </tr>
+
+	  <%-- <%= u.getName() %><br> --%>
+ <%}%>
+  
+  
 
 </table>
-<br/>
+
 
 
 

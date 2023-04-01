@@ -13,7 +13,7 @@
 <body>
     <h1>completion</h1>
     <h2>list</h2>
-    <form action="./UserListController" method="post">
+    <form action="./userList" method="post">
 		<input type="submit" value="list">
 		</form>
 </body>
