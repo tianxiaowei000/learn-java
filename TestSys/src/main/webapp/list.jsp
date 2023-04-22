@@ -25,6 +25,9 @@
 	  <td><%= u.getPassword() %></td>
 	  <td><%= u.getName() %></td>
 	  <td><%= u.getNameKana() %></td>
+	  <td><button type="button" onclick="location.href='../TestSys/UserChange?email=<%= u.getEmail() %>&userId=<%= u.getUserId() %>&password=<%= u.getPassword() %>&name=<%= u.getName() %>&nameKana=<%= u.getNameKana() %>'"><%= u.getEmail() %></button></td>
+	  
+	  
    </tr>
 
 	  <%-- <%= u.getName() %><br> --%>
@@ -33,7 +36,6 @@
   
 
 </table>
-
 
 
 

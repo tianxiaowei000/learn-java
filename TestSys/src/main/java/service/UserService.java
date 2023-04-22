@@ -8,10 +8,10 @@ import dao.UserDao;
 import dto.UserDto;
 
 public class UserService {
+	UserDao userDao = new UserDao();
 
 	public void createUser(String email, String userId, String password, String name, String nameKana) {
 
-		UserDao userDao = new UserDao();
 
 		userDao.createUser(email, userId, password, name, nameKana);
 	}
@@ -22,9 +22,18 @@ public class UserService {
 	 */
 	public  List<UserDto> userList() {
 		
-		UserDao userDao = new UserDao();
 		List<UserDto> list =userDao.userList();
 		return list;
 		
 	}
+	public void changeUserInfo(String email, String userId, String password, String name, String nameKana) {
+
+
+		
+
+		userDao.changeUser(email, userId, password, name, nameKana);
+	
+	}
+	
+	
 }

@@ -34,7 +34,7 @@ public class UserConfirmationController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	/**
@@ -44,7 +44,6 @@ public class UserConfirmationController extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
-
 
 		request.setCharacterEncoding("utf-8");
 		response.getWriter().append("Served at: ").append(request.getContextPath());
@@ -64,7 +63,6 @@ public class UserConfirmationController extends HttpServlet {
 		RequestDispatcher rd = sc.getRequestDispatcher("/completion.jsp");
 
 		rd.forward(request, response);
-	
 	}
 
 }

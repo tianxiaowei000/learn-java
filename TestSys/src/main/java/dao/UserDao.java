@@ -22,6 +22,8 @@ public class UserDao {
 	private static final String PASSWORD = "Dd345678";
 	
 	
+	
+	
 	/**
 	 * お客様情報新規登録
 	 */
@@ -53,7 +55,7 @@ public class UserDao {
 					+ ") "
 					+ "VALUES ( "
 					+ "    '" + email + "' "
-					+ "    , '" + 0 + "' "
+					+ "    , '" + userId + "' "
 					+ "    , '" + password + "' "
 					+ "    , '" + name + "' "
 					+ "    , '" + nameKana + "' "
@@ -106,5 +108,30 @@ public class UserDao {
 			e.printStackTrace();
 		}
 		return list;
+	}
+	public void changeUser(String email, String userId, String password, String name, String nameKana) {
+		try {
+			
+			Class.forName("org.postgresql.Driver");
+			conn = DriverManager.getConnection(URL, USER, PASSWORD);
+			stmt = conn.createStatement();
+
+			String sql = "UPDATE user_info "
+					 + "set user_id =" + "'" +  userId + "'" + ",\n"	
+	                    + " password =" + "'" + password + "'" + ",\n"
+	                    + " name =" + "'" + name + "'" + ",\n"
+	                    + " name_kana =" + "'" + nameKana + "'" + "\n"
+	                    + " where email =" + "'" + email + "'" + ";";
+			stmt.executeUpdate(sql);
+
+			
+			stmt.close();
+			conn.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 }

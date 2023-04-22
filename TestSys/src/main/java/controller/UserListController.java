@@ -46,7 +46,7 @@ public class UserListController extends HttpServlet {
 		String name = (String) session.getAttribute("name");
 		String nameKana = (String) session.getAttribute("nameKana");
 
-		
+	
 		
 		UserService userservice = new UserService();
 		List<UserDto> list =userservice.userList();
@@ -71,8 +71,5 @@ public class UserListController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		doGet(request, response);
-
 	}
-
 }

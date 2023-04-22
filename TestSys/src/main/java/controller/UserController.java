@@ -89,9 +89,14 @@ public class UserController extends HttpServlet {
 //		session.setAttribute("lname_kana", lname_kana);
 //		session.setAttribute("fname_kana", fname_kana);
 //		
-		
-		
-		String userId = radiomail;
+	 
+		String u=request.getParameter("u");
+		String userId = "";
+		if (radiomail.equals("0")) {
+		  userId = email;
+		} else if (radiomail.equals("1")) {
+		  userId = u;
+		}
 		String password = pwd;
 		String name = surname+ lastname;
 		String nameKana = surnamekana + lastnamekana;
